@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; padding: 0; background: transparent; }
+  svg { display: block; width: 1600px; height: 900px; }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 水彩柔边 -->
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+    <filter id="softer" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+    <filter id="softest" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="40"/>
+    </filter>
+    <!-- 水彩纸纹理 / 晕染抖动 -->
+    <filter id="wc" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="3" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="38"/>
+      <feGaussianBlur stdDeviation="3.5"/>
+    </filter>
+    <filter id="wcFar" x="-30%" y="-30%" width="160%" height="160%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.01 0.018" numOctaves="3" seed="11" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="52"/>
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cfc6e6" stop-opacity="0"/>
+      <stop offset="1" stop-color="#cfc6e6" stop-opacity=".34"/>
+    </linearGradient>
+    <linearGradient id="lake" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b9acd9" stop-opacity=".30"/>
+      <stop offset="1" stop-color="#b9acd9" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 天光与湖面基调 -->
+  <rect x="0" y="120" width="1600" height="460" fill="url(#sky)" filter="url(#softest)"/>
+  <rect x="0" y="560" width="1600" height="340" fill="url(#lake)" filter="url(#softest)"/>
+
+  <!-- 远山（最淡） -->
+  <g filter="url(#wcFar)" opacity=".5">
+    <path d="M-40 560 Q 180 470 380 535 Q 520 575 640 548 Q 760 522 900 552 L 900 620 L -40 620 Z" fill="#cfc6e6"/>
+    <path d="M980 556 Q 1120 492 1260 536 Q 1390 576 1640 540 L 1640 620 L 980 620 Z" fill="#cfc6e6" opacity=".8"/>
+  </g>
+
+  <!-- 雷峰塔（画面右侧，五层，飞檐） -->
+  <g filter="url(#wc)" opacity=".88">
+    <!-- 塔身底层台基 -->
+    <path d="M1136 588 L1246 588 L1238 566 L1144 566 Z" fill="#9a8ac4" opacity=".55"/>
+    <!-- 第一层 -->
+    <path d="M1150 566 L1232 566 L1226 512 L1156 512 Z" fill="#9a8ac4" opacity=".6"/>
+    <path d="M1128 516 Q1191 498 1254 516 Q1252 506 1244 503 L1138 503 Q1130 506 1128 516 Z" fill="#8a79b4" opacity=".62"/>
+    <!-- 第二层 -->
+    <path d="M1158 503 L1224 503 L1219 456 L1163 456 Z" fill="#9a8ac4" opacity=".58"/>
+    <path d="M1140 460 Q1191 444 1242 460 Q1240 451 1233 448 L1149 448 Q1142 451 1140 460 Z" fill="#8a79b4" opacity=".6"/>
+    <!-- 第三层 -->
+    <path d="M1165 448 L1217 448 L1213 407 L1169 407 Z" fill="#9a8ac4" opacity=".56"/>
+    <path d="M1149 411 Q1191 397 1233 411 Q1231 402 1225 400 L1157 400 Q1151 402 1149 411 Z" fill="#8a79b4" opacity=".58"/>
+    <!-- 第四层 -->
+    <path d="M1171 400 L1211 400 L1208 364 L1174 364 Z" fill="#9a8ac4" opacity=".54"/>
+    <path d="M1157 368 Q1191 356 1225 368 Q1223 360 1218 358 L1164 358 Q1159 360 1157 368 Z" fill="#8a79b4" opacity=".56"/>
+    <!-- 第五层 -->
+    <path d="M1176 358 L1206 358 L1204 326 L1178 326 Z" fill="#9a8ac4" opacity=".52"/>
+    <path d="M1164 330 Q1191 319 1218 330 Q1216 322 1212 320 L1170 320 Q1166 322 1164 330 Z" fill="#8a79b4" opacity=".55"/>
+    <!-- 塔刹 -->
+    <path d="M1191 320 L1191 296 M1184 305 L1198 305 M1186 313 L1196 313" stroke="#8a79b4" stroke-width="4" stroke-linecap="round" opacity=".6"/>
+    <circle cx="1191" cy="292" r="5" fill="#8a79b4" opacity=".6"/>
+    <!-- 塔后暖色晕染（夕照） -->
+    <ellipse cx="1191" cy="430" rx="150" ry="170" fill="#f2d8cf" opacity=".35" filter="url(#softer)"/>
+  </g>
+
+  <!-- 断桥（左侧，单孔石拱桥） -->
+  <g filter="url(#wc)" opacity=".8">
+    <path d="M150 596 Q 320 516 490 596 L 490 610 L 150 610 Z" fill="#b9acd9" opacity=".55"/>
+    <path d="M262 596 Q 320 552 378 596 L 378 610 L 262 610 Z" fill="#f1ede2" opacity=".9"/>
+    <!-- 桥上栏杆暗示 -->
+    <path d="M168 584 Q 320 510 472 584" fill="none" stroke="#9a8ac4" stroke-width="3.5" stroke-linecap="round" opacity=".5"/>
+    <path d="M196 570 L196 584 M252 548 L252 566 M320 536 L320 556 M388 548 L388 566 M444 570 L444 584" stroke="#9a8ac4" stroke-width="2.5" stroke-linecap="round" opacity=".4"/>
+    <!-- 桥畔几笔柳色 -->
+    <path d="M120 600 Q 128 556 116 528 M136 602 Q 148 560 140 534 M506 602 Q 500 560 514 532" stroke="#b9acd9" stroke-width="5" stroke-linecap="round" fill="none" opacity=".4" filter="url(#soft)"/>
+  </g>
+
+  <!-- 三潭印月（湖中三座小石塔） -->
+  <g filter="url(#wc)" opacity=".72">
+    <g>
+      <path d="M700 640 L712 640 L709 622 L703 622 Z" fill="#9a8ac4" opacity=".6"/>
+      <circle cx="706" cy="618" r="4.5" fill="#9a8ac4" opacity=".6"/>
+      <path d="M700 622 L712 622" stroke="#9a8ac4" stroke-width="2" opacity=".5"/>
+    </g>
+    <g transform="translate(92,14) scale(.86)">
+      <path d="M700 640 L712 640 L709 622 L703 622 Z" fill="#9a8ac4" opacity=".55"/>
+      <circle cx="706" cy="618" r="4.5" fill="#9a8ac4" opacity=".55"/>
+    </g>
+    <g transform="translate(-84,20) scale(.74)">
+      <path d="M700 640 L712 640 L709 622 L703 622 Z" fill="#9a8ac4" opacity=".5"/>
+      <circle cx="706" cy="618" r="4.5" fill="#9a8ac4" opacity=".5"/>
+    </g>
+  </g>
+
+  <!-- 水面倒影与波光 -->
+  <g filter="url(#softer)">
+    <path d="M1150 620 Q1191 636 1232 620 L1226 720 Q1191 738 1156 720 Z" fill="#b9acd9" opacity=".28"/>
+    <path d="M180 622 Q320 660 460 622 L450 690 Q320 716 190 690 Z" fill="#b9acd9" opacity=".22"/>
+    <ellipse cx="706" cy="668" rx="34" ry="10" fill="#b9acd9" opacity=".3"/>
+  </g>
+  <g stroke="#cfc6e6" stroke-linecap="round" filter="url(#soft)" opacity=".55">
+    <path d="M560 700 Q640 694 720 700" stroke-width="5" fill="none"/>
+    <path d="M900 740 Q1010 733 1120 740" stroke-width="6" fill="none"/>
+    <path d="M260 740 Q380 733 500 740" stroke-width="5" fill="none"/>
+    <path d="M1180 800 Q1300 792 1420 800" stroke-width="6" fill="none"/>
+  </g>
+
+  <!-- 近景角落淡叶影（右下，增加层次） -->
+  <g filter="url(#softest)" opacity=".5">
+    <ellipse cx="1470" cy="860" rx="220" ry="90" fill="#b9acd9" opacity=".5"/>
+    <ellipse cx="90" cy="880" rx="180" ry="70" fill="#cfc6e6" opacity=".45"/>
+  </g>
+</svg>
+</body>
+</html>
